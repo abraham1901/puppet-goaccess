@@ -97,9 +97,11 @@ class goaccess (
   # a list
   $dependencies_array = $goaccess::dependencies_packages
 
+  if $dependencies_array {
 
-  goaccess::install_dependency { $dependencies_packages:    # array
-    array => $dependencies_array
+    goaccess::install_dependency { $dependencies_packages:    # array
+      array => $dependencies_array
+    }
   }
 
 
