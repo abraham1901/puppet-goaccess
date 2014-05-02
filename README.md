@@ -44,4 +44,4 @@ Released under the terms of Apache 2 License.
 
 
 ## TESTING
-[![Build Status](https://travis-ci.org/renanvicente/puppet-goaccess.png?branch=master)](https://travis-ci.org/renanvicente/puppet-goaccess)
+[![Build Status](https://travis-ci.org/renanvicente/puppet-goaccess.svg?branch=master)](https://travis-ci.org/renanvicente/puppet-goaccess)

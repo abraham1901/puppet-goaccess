@@ -72,19 +72,19 @@ class goaccess (
   ### Managed resources
 
   ### DEPENDENCIES class
-   if $operatingsystem =~ /Debian|Ubuntu/ {
+  if $::operatingsystem =~ /Debian|Ubuntu/ {
         apt::source {'goaccess':
           location    => 'http://deb.goaccess.prosoftcorp.com',
           repos       => 'main',
-          release     => $lsbdistcodename,
+          release     => $::lsbdistcodename,
           key         => 'B1CF938A',
           key_source  => 'http://deb.goaccess.prosoftcorp.com/gnugpg.key',
           include_src => false,
         }
       }
-
-  define goacess::install_dependency(
-    $array
+  # work around to use defined with array
+  define goaccess::install_dependency(
+    $::array
   ){
     if ! defined(Package["${name}"]) {
       package { "${name}":
@@ -98,7 +98,7 @@ class goaccess (
   $dependencies_array = $goaccess::dependencies_packages
 
 
-  goacess::install_dependency { $dependencies_packages:    # array
+  goaccess::install_dependency { $dependencies_packages:    # array
     array => $dependencies_array
   }
 
