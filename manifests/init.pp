@@ -84,7 +84,7 @@ class goaccess (
       }
   # work around to use defined with array
   define goaccess::install_dependency(
-    $::array
+    $array
   ){
     if ! defined(Package["${name}"]) {
       package { "${name}":
@@ -99,7 +99,7 @@ class goaccess (
 
   if $dependencies_array {
 
-    goaccess::install_dependency { $dependencies_packages:    # array
+    goaccess::install_dependency { $dependencies_array:    # array
       array => $dependencies_array
     }
   }
