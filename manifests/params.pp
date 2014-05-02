@@ -19,6 +19,7 @@ class goaccess::params {
   $dependencies_packages    = $::operatingsystem ? {
     /Debian|Ubuntu/        => ['libncurses5-dev','libncursesw5-dev','libglib2.0-dev','libgeoip-dev'],
     /Fedora|CentOS|RedHat/ => ['ncurses-devel','glib2-devel','GeoIP-devel'],
+    default                => undef,
   }
   $package = 'goaccess'
 
