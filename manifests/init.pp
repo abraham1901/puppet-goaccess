@@ -56,7 +56,7 @@ class goaccess (
   $absent                 = params_lookup( 'absent' ),
   $noops                  = params_lookup( 'noops' ),
   $package                = params_lookup( 'package' ),
-  $dependencies_packages  = params_lookup( 'dependencies_packages' ),
+  $dependencies_packages  = params_lookup( 'dependencies_packages' )
 
   ) inherits goaccess::params {
 
