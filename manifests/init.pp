@@ -56,9 +56,9 @@ class goaccess (
   $absent                 = params_lookup( 'absent' ),
   $noops                  = params_lookup( 'noops' ),
   $package                = params_lookup( 'package' ),
-  $dependencies_packages  = params_lookup( 'dependencies_packages' )
-
-  ) inherits goaccess::params {
+  $dependencies_packages  = params_lookup( 'dependencies_packages' ),
+  $release                = $::lsbdistcodename,
+) inherits goaccess::params {
 
   $bool_absent=any2bool($absent)
   $bool_noops=any2bool($noops)
@@ -73,27 +73,13 @@ class goaccess (
 
   ### DEPENDENCIES class
   if $::operatingsystem =~ /Debian|Ubuntu/ {
-        apt::source {'goaccess':
-          location    => 'http://deb.goaccess.prosoftcorp.com',
-          repos       => 'main',
-          release     => $::lsbdistcodename,
-          key         => 'B1CF938A',
-          key_source  => 'http://deb.goaccess.prosoftcorp.com/gnugpg.key',
-          include_src => false,
-        }
-      }
-  # work around to use defined with array
-  define goaccess::install_dependency(
-    $array
-  ){
-    if ! defined(Package["${name}"]) {
-      package { "${name}":
-        ensure => $goaccess::manage_package,
-        noop   => $goaccess::bool_noops,
-      }
+    apt::source {'goaccess':
+      location => 'http://deb.goaccess.io',
+      repos    => 'main',
+      release  => $release,
+      key      => '790BC7277767219C42C86F933B4FE6ACC0B21F32',
     }
   }
-
   # a list
   $dependencies_array = $goaccess::dependencies_packages
 
@@ -104,17 +90,11 @@ class goaccess (
     }
   }
 
-
   if ! defined(Package[$goaccess::package]) {
     package { $goaccess::package:
-      ensure  => $goaccess::manage_package,
-      noop    => $goaccess::bool_noops,
+      ensure => $goaccess::manage_package,
+      noop   => $goaccess::bool_noops,
     }
   }
-
-  ### Include custom class if $my_class is set
-  if $goaccess::my_class {
-    include $goaccess::my_class
-  }
-
 }
+
